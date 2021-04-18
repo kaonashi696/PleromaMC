@@ -22,5 +22,6 @@ public class PlayerDeathListener implements Listener{
 		
 		HTTPSPostRequest.sendPOST(core, "status=" + deathMessage);
 	}
+	
 
 }
