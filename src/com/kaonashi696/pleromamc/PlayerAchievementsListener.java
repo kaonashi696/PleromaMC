@@ -9,6 +9,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 
 public class PlayerAchievementsListener implements Listener {
+	
+	PleromaMC core;
+
+	public PlayerAchievementsListener(PleromaMC core) {
+	  this.core = core;
+	}
+	
 	@EventHandler
 	public void onPlayerAdvancementDone(PlayerAdvancementDoneEvent event) throws IOException {
 		if (event == null) return;
@@ -19,7 +26,7 @@ public class PlayerAchievementsListener implements Listener {
 		Player player = event.getPlayer();
 		//if (StringUtils.isBlank(Advancement)) return;
 		
-		HTTPSPostRequest.sendPOST("status=" + player + " has made the advancement " + advancement);
+		HTTPSPostRequest.sendPOST(core, "status=" + player + " has made the advancement " + advancement);
 	}
 
 }

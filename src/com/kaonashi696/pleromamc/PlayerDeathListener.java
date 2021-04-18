@@ -9,12 +9,18 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class PlayerDeathListener implements Listener{
 	
+	PleromaMC core;
+
+	public PlayerDeathListener(PleromaMC core) {
+	  this.core = core;
+	}
+
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent event) throws IOException {
 		String deathMessage = event.getDeathMessage();
 		if (StringUtils.isBlank(deathMessage)) return;
 		
-		HTTPSPostRequest.sendPOST("status=" + deathMessage);
+		HTTPSPostRequest.sendPOST(core, "status=" + deathMessage);
 	}
 
 }

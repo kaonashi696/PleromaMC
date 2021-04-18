@@ -7,24 +7,15 @@ import java.io.OutputStream;
 import javax.net.ssl.HttpsURLConnection;
 
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
-
 import java.net.URL;
 
-public class HTTPSPostRequest extends JavaPlugin{
+public class HTTPSPostRequest{
 	
-	FileConfiguration config = getConfig();
-	
-	public String getString(String string) {
-    	config.getString(string);
-		return string;
-    }  
-			
-    public static void sendPOST(String POST_PARAMS) throws IOException {
+	public static void sendPOST(PleromaMC core, String POST_PARAMS) throws IOException {
     	
-    	HTTPSPostRequest get=new HTTPSPostRequest();
-    	String oauth = get.getString("oauth");
-    	String post_url = get.getString("post_url");
+		FileConfiguration config = core.getConfig();
+    	String oauth = config.getString("oauth");
+    	String post_url = config.getString("post_url");
     	
         URL obj = new URL(post_url);
         HttpsURLConnection httpsURLConnection = (HttpsURLConnection) obj.openConnection();
