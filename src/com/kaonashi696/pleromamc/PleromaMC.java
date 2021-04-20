@@ -7,6 +7,9 @@ import java.util.function.Consumer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.kaonashi696.pleromamc.listeners.PlayerAdvancementDoneListener;
+import com.kaonashi696.pleromamc.listeners.PlayerDeathListener;
+
 public final class PleromaMC extends JavaPlugin {
     // Fired when plugin is first enabled
 	FileConfiguration config = getConfig();

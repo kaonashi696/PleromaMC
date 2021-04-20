@@ -1,4 +1,4 @@
-package com.kaonashi696.pleromamc;
+package com.kaonashi696.pleromamc.listeners;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -10,11 +10,15 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.advancement.Advancement;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
+
+import com.kaonashi696.pleromamc.HTTPSPostRequest;
+import com.kaonashi696.pleromamc.PleromaMC;
 
 public class PlayerAdvancementDoneListener implements Listener {
 	
@@ -40,6 +44,10 @@ public class PlayerAdvancementDoneListener implements Listener {
     }
 	
 	private void runAsync(PlayerAdvancementDoneEvent event) throws IOException {
+		
+		FileConfiguration config = core.getConfig();
+		String post_url = config.getString("post_url") + "api/v1/statuses";
+		
         try {
             Object craftAdvancement = ((Object) event.getAdvancement()).getClass().getMethod("getHandle").invoke(event.getAdvancement());
             Object advancementDisplay = craftAdvancement.getClass().getMethod("c").invoke(craftAdvancement);
@@ -58,7 +66,7 @@ public class PlayerAdvancementDoneListener implements Listener {
         Advancement advancement = event.getAdvancement();
         String advancementTitle = getTitle(advancement);
         
-        HTTPSPostRequest.sendPOST(core, "status=" + displayName + " has made the advancement " + advancementTitle);
+        HTTPSPostRequest.sendPOST(core, post_url, "status=:trophy: " + displayName + " has made the advancement " + advancementTitle);
 
 		}
         

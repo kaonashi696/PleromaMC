@@ -1,0 +1,10 @@
+name: PleromaMC
+main: com.kaonashi696.pleromamc.PleromaMC
+version: 0.3.7
+api-version: 1.13
+commands:
+   customcmd:
+      description: Custom Test Command
+      usage: /customcmd
+      permission: PleromaMC.test
+   

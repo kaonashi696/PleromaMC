@@ -9,28 +9,28 @@ import javax.net.ssl.HttpsURLConnection;
 import org.bukkit.configuration.file.FileConfiguration;
 import java.net.URL;
 
-public class HTTPSPostRequest{
+public class HTTPSPatchRequest{
 	
-	public static void sendPOST(PleromaMC core, String post_url, String POST_PARAMS) throws IOException {
+	public static void sendPATCH(PleromaMC core, String post_url, String POST_PARAMS) throws IOException {
     	
 		FileConfiguration config = core.getConfig();
     	String oauth = config.getString("oauth");
     	
         URL obj = new URL(post_url);
         HttpsURLConnection httpsURLConnection = (HttpsURLConnection) obj.openConnection();
-        httpsURLConnection.setRequestMethod("POST");
+        httpsURLConnection.setRequestMethod("PATCH");
         httpsURLConnection.setRequestProperty("Authorization","Bearer "+ oauth);
 
-        // For POST only - START
+        // For PATCH only - START
         httpsURLConnection.setDoOutput(true);
         OutputStream os = httpsURLConnection.getOutputStream();
         os.write(POST_PARAMS.getBytes());
         os.flush();
         os.close();
-        // For POST only - END
+        // For PATCH only - END
 
         int responseCode = httpsURLConnection.getResponseCode();
-        System.out.println("POST Response Code :: " + responseCode);
+        System.out.println("PATCH Response Code :: " + responseCode);
 
         if (responseCode == HttpsURLConnection.HTTP_OK) { // success
             BufferedReader in = new BufferedReader(new InputStreamReader(httpsURLConnection.getInputStream()));
@@ -44,8 +44,7 @@ public class HTTPSPostRequest{
             // print result
             System.out.println(response.toString());
         } else {
-            System.out.println("POST request not worked");
+            System.out.println("PATCH request not worked");
         }
     }
 }
-
