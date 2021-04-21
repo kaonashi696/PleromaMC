@@ -39,7 +39,7 @@ public class PlayerDeathListener implements Listener{
 		
 		if (StringUtils.isBlank(deathMessage)) return;
 		
-		HTTPSPostRequest.sendPOST(core, post_url, "status=:skull_crossbones: " + deathMessage + " and dropped " + items);
+		HTTPSPostRequest.sendPOST(core, post_url, "status=:skull_crossbones: #" + deathMessage + " and dropped " + items);
 	}
 	
 

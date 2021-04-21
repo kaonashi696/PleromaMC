@@ -66,7 +66,7 @@ public class PlayerAdvancementDoneListener implements Listener {
         Advancement advancement = event.getAdvancement();
         String advancementTitle = getTitle(advancement);
         
-        HTTPSPostRequest.sendPOST(core, post_url, "status=:trophy: " + displayName + " has made the advancement " + advancementTitle);
+        HTTPSPostRequest.sendPOST(core, post_url, "status=:trophy: #" + displayName + " has made the advancement " + advancementTitle);
 
 		}
         
