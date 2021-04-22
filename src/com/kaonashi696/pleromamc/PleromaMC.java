@@ -22,7 +22,7 @@ public final class PleromaMC extends JavaPlugin {
     public void onEnable() {    	
     	getServer().getPluginManager().registerEvents(new PlayerDeathListener(this), this);
     	getServer().getPluginManager().registerEvents(new PlayerAdvancementDoneListener(this), this);
-    	this.getCommand("customcmd").setExecutor(new CustomCommand(this));
+    	//this.getCommand("customcmd").setExecutor(new CustomCommand(this));
     	
     	config.addDefault("oauth", "TOKEN");
     	config.addDefault("post_url", "https://example.com/api/v1/statuses");
