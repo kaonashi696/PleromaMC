@@ -1,6 +1,6 @@
 name: PleromaMC
 main: com.kaonashi696.pleromamc.PleromaMC
-version: 0.3.7
+version: 0.4.1
 api-version: 1.13
 commands:
    customcmd:

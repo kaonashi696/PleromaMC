@@ -7,6 +7,7 @@ import java.util.function.Consumer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.kaonashi696.pleromamc.commands.CommandReload;
 import com.kaonashi696.pleromamc.listeners.PlayerAdvancementDoneListener;
 import com.kaonashi696.pleromamc.listeners.PlayerDeathListener;
 
@@ -22,12 +23,12 @@ public final class PleromaMC extends JavaPlugin {
     public void onEnable() {    	
     	getServer().getPluginManager().registerEvents(new PlayerDeathListener(this), this);
     	getServer().getPluginManager().registerEvents(new PlayerAdvancementDoneListener(this), this);
-    	//this.getCommand("customcmd").setExecutor(new CustomCommand(this));
+    	this.getCommand("reload").setExecutor(new CommandReload());
     	
-    	config.addDefault("pleroma", "false");
+    	config.addDefault("pleroma", false);
     	config.addDefault("pleromaOauth", "TOKEN");
     	config.addDefault("pleromaPostUrl", "https://example.com/api/v1/statuses");
-    	config.addDefault("twitter", "false");
+    	config.addDefault("twitter", false);
     	config.addDefault("twitterConsumerKey", "consumerKey (API Key)");
     	config.addDefault("twitterConsumerSecret", "consumerSecret (API Secret key)");
     	config.addDefault("twitterAccessToken", "accessToken");
