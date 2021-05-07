@@ -13,8 +13,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.kaonashi696.pleromamc.HTTPSPostRequest;
 import com.kaonashi696.pleromamc.PleromaMC;
+import com.kaonashi696.pleromamc.pleroma.HTTPSPostRequest;
+import com.kaonashi696.pleromamc.twitter.tweet;
 
 public class PlayerDeathListener implements Listener{
 	
@@ -41,7 +42,7 @@ public class PlayerDeathListener implements Listener{
 	private void runAsync(PlayerDeathEvent event) throws IOException {
 		
 		FileConfiguration config = core.getConfig();
-		String post_url = config.getString("post_url") + "api/v1/statuses";
+		String post_url = config.getString("pleromaPostUrl") + "api/v1/statuses";
 		
 		String deathMessage = event.getDeathMessage();
 		List<ItemStack> drops = event.getDrops();
@@ -57,6 +58,8 @@ public class PlayerDeathListener implements Listener{
     		HTTPSPostRequest.sendPOST(core, post_url, "status=:skull_crossbones: #" + deathMessage + " and didn't drop anything.");
         else
     		HTTPSPostRequest.sendPOST(core, post_url, "status=:skull_crossbones: #" + deathMessage + " and dropped " + items);
+        	tweet.sendPOST(core, deathMessage);
+        
 		
 	}
 	

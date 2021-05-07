@@ -9,8 +9,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 
-import com.kaonashi696.pleromamc.HTTPSPostRequest;
 import com.kaonashi696.pleromamc.PleromaMC;
+import com.kaonashi696.pleromamc.pleroma.HTTPSPostRequest;
+import com.kaonashi696.pleromamc.twitter.tweet;
 
 public class PlayerAchievementsListener implements Listener {
 	
@@ -21,7 +22,7 @@ public class PlayerAchievementsListener implements Listener {
 	}
 	
 	FileConfiguration config = core.getConfig();
-	String post_url = config.getString("post_url") + "api/v1/statuses";
+	String post_url = config.getString("pleromaPostUrl") + "api/v1/statuses";
 	
 	@EventHandler
 	public void onPlayerAdvancementDone(PlayerAdvancementDoneEvent event) throws IOException {
@@ -31,9 +32,11 @@ public class PlayerAchievementsListener implements Listener {
 		Advancement advancement = event.getAdvancement();
 		//String Player = event.getPlayer().toString();
 		Player player = event.getPlayer();
+		String displayName = player.getDisplayName();
 		//if (StringUtils.isBlank(Advancement)) return;
 		
-		HTTPSPostRequest.sendPOST(core, post_url, "status=" + player + " has made the advancement " + advancement);
+		HTTPSPostRequest.sendPOST(core, post_url, "status=" + displayName + " has made the advancement " + advancement);
+		tweet.sendPOST(core, displayName + " has made the advancement " + advancement);
 	}
 
 }

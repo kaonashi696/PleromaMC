@@ -1,4 +1,4 @@
-package com.kaonashi696.pleromamc;
+package com.kaonashi696.pleromamc.pleroma;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,6 +7,9 @@ import java.io.OutputStream;
 import javax.net.ssl.HttpsURLConnection;
 
 import org.bukkit.configuration.file.FileConfiguration;
+
+import com.kaonashi696.pleromamc.PleromaMC;
+
 import java.net.URL;
 
 public class HTTPSPostRequest{
@@ -14,7 +17,7 @@ public class HTTPSPostRequest{
 	public static void sendPOST(PleromaMC core, String post_url, String POST_PARAMS) throws IOException {
     	
 		FileConfiguration config = core.getConfig();
-    	String oauth = config.getString("oauth");
+    	String oauth = config.getString("pleromaOauth");
     	
         URL obj = new URL(post_url);
         HttpsURLConnection httpsURLConnection = (HttpsURLConnection) obj.openConnection();

@@ -24,8 +24,14 @@ public final class PleromaMC extends JavaPlugin {
     	getServer().getPluginManager().registerEvents(new PlayerAdvancementDoneListener(this), this);
     	//this.getCommand("customcmd").setExecutor(new CustomCommand(this));
     	
-    	config.addDefault("oauth", "TOKEN");
-    	config.addDefault("post_url", "https://example.com/api/v1/statuses");
+    	config.addDefault("pleroma", "false");
+    	config.addDefault("pleromaOauth", "TOKEN");
+    	config.addDefault("pleromaPostUrl", "https://example.com/api/v1/statuses");
+    	config.addDefault("twitter", "false");
+    	config.addDefault("twitterConsumerKey", "consumerKey (API Key)");
+    	config.addDefault("twitterConsumerSecret", "consumerSecret (API Secret key)");
+    	config.addDefault("twitterAccessToken", "accessToken");
+    	config.addDefault("twitterAccessTokenSecret", "accessTokenSecret");
     	config.options().copyDefaults(true);
         saveConfig();
 

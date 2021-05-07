@@ -17,8 +17,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 
-import com.kaonashi696.pleromamc.HTTPSPostRequest;
 import com.kaonashi696.pleromamc.PleromaMC;
+import com.kaonashi696.pleromamc.pleroma.HTTPSPostRequest;
+import com.kaonashi696.pleromamc.twitter.tweet;
 
 public class PlayerAdvancementDoneListener implements Listener {
 	
@@ -46,7 +47,7 @@ public class PlayerAdvancementDoneListener implements Listener {
 	private void runAsync(PlayerAdvancementDoneEvent event) throws IOException {
 		
 		FileConfiguration config = core.getConfig();
-		String post_url = config.getString("post_url") + "api/v1/statuses";
+		String post_url = config.getString("pleromaPostUrl") + "api/v1/statuses";
 		
         try {
             Object craftAdvancement = ((Object) event.getAdvancement()).getClass().getMethod("getHandle").invoke(event.getAdvancement());
@@ -67,7 +68,7 @@ public class PlayerAdvancementDoneListener implements Listener {
         String advancementTitle = getTitle(advancement);
         
         HTTPSPostRequest.sendPOST(core, post_url, "status=:trophy: #" + displayName + " has made the advancement " + advancementTitle);
-
+        tweet.sendPOST(core, displayName + " has made the advancement " + advancementTitle);
 		}
         
         private static final Map<Advancement, String> ADVANCEMENT_TITLE_CACHE = new ConcurrentHashMap<>();
